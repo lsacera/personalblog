@@ -1,0 +1,31 @@
+# File to test kiuwan integration
+# Delivery: uses: lsacera/KiuwanDeliveryAction@v0.4 
+# Baseline: uses: lsacera/KiuwanBaselineAction@v0.4
+name: Kiuwan Test Workflow
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v1
+      - name: Kiuwan Action Test - Baseline or Delivery
+        uses: lsacera/KiuwanBaselineAction@v0.4
+        id: kstep
+        with:
+          # Name of Kiuwan project
+          project: Personalblog
+          # Label for the analysis
+          label: ${{ github.run_number }}
+          # Username for kiuwan platform
+          userid: ${{ secrets.KIUWAN_USER }}
+          # Password for kiuwan platform
+          password: ${{ secrets.KIUWAN_PASS }}
+          # Change request, only for deliveries
+          #changerequest: cr_test
+          # Branch, only for deliveries
+          #branch: $${{ github.ref }}
+      
+      - name: show results step
+        #run: echo 'The result was ${{ steps.kstep.outputs.result }} and the message was ${{ steps.kstep.outputs.message }} and the audit result ${{ steps.kstep.outputs.auditresult }} and The url was ${{ steps.kstep.outputs.analysisurl }}.'
+        run: echo 'The result was ${{ steps.kstep.outputs.result }} and the message was ${{ steps.kstep.outputs.message }} and The url was ${{ steps.kstep.outputs.analysisurl }}.'
