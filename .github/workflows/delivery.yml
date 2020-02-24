@@ -7,7 +7,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v1
       - name: Kiuwan Action Test - Baseline or Delivery
-        uses: lsacera/KiuwanDelivery@v0.4
+        uses: lsacera/KiuwanDeliveryAction@v0.4
         id: kstep
         with:
           # Name of Kiuwan project
