@@ -1,0 +1,23 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Kiuwan Baseline Step
+      uses: lsacera/KiuwanBaselineAction@v0.4
+      id: kstep
+      with:
+        project: Personalblog
+        label: ${{ github.run_number }}
+        userid: ${{ secrets.KIUWAN_USER }}
+        password: ${{ secrets.KIUWAN_PASS }}
+    
+    - name: show results step
+      run: echo 'The result was ${{ steps.kstep.outputs.result }} and the message was ${{ steps.kstep.outputs.message }} and The url was ${{ steps.kstep.outputs.analysisurl }}.'
+      
